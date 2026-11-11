@@ -55,7 +55,31 @@
     }
   </style>
 </head>
-<body class="bg-stone-900 text-stone-800 min-h-screen flex flex-col items-center justify-center p-2 sm:p-6 select-none">
+<body class="bg-stone-900 text-stone-800 min-h-screen flex flex-col items-center justify-start p-2 sm:p-6 select-none">
+
+  <!-- Top bar controls -->
+  <header class="w-full max-w-4xl flex flex-wrap items-center justify-between gap-3 py-3 px-4 mb-4 bg-stone-800/80 backdrop-blur rounded-2xl border border-stone-700 text-white text-sm">
+    <div class="flex items-center gap-3">
+      <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+      <span class="font-bold tracking-tight text-white flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-brand fill-brand" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Oficinas do Coração
+      </span>
+      <span class="text-stone-400 text-xs hidden sm:inline">| Protótipo Interativo IHC</span>
+    </div>
+
+    <!-- Quick navigation bar for testing -->
+    <div class="flex items-center gap-1.5 overflow-x-auto text-xs py-1">
+      <button onclick="navigate('home')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="home">01 Home</button>
+      <button onclick="selectWorkshop('pintura'); navigate('detalhes')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="detalhes">02 Detalhes</button>
+      <button onclick="navigate('inscricao')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="inscricao">03 Inscrição</button>
+      <button onclick="navigate('confirmacao')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="confirmacao">04 Confirmação</button>
+      <button onclick="navigate('admin')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="admin">05 Admin</button>
+      <button onclick="navigate('cadastro')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="cadastro">06 Cadastro</button>
+      <button onclick="navigate('inscritos')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="inscritos">07 Inscritos</button>
+      <button onclick="navigate('perfil')" class="nav-btn px-2.5 py-1 rounded-lg bg-stone-700 hover:bg-stone-600 font-medium transition" data-screen="perfil">08 Perfil</button>
+    </div>
+  </header>
 
   <!-- Phone Mockup Container -->
   <main class="relative w-full max-w-[400px] h-[820px] rounded-[44px] phone-shadow bg-brand-bg overflow-hidden flex flex-col border border-stone-800">
@@ -818,6 +842,17 @@
         target.classList.remove('hidden');
         document.getElementById('screenContainer').scrollTop = 0;
       }
+
+      // Update top preview nav buttons active style
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.getAttribute('data-screen') === screenName) {
+          btn.classList.add('bg-brand', 'text-white');
+          btn.classList.remove('bg-stone-700', 'text-stone-300');
+        } else {
+          btn.classList.remove('bg-brand', 'text-white');
+          btn.classList.add('bg-stone-700', 'text-stone-300');
+        }
+      });
     }
 
     // Keyboard shortcuts (1-8) for quick navigation during tests
